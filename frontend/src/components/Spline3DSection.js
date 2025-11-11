@@ -12,7 +12,7 @@ export default function Spline3DSection() {
         const script = document.createElement('script');
         script.id = 'spline-viewer-script';
         script.type = 'module';
-        script.src = 'https://unpkg.com/@splinetool/viewer/build/spline-viewer.js';
+        script.src = 'https://unpkg.com/@splinetool/viewer@1.10.99/build/spline-viewer.js';
         script.onload = () => {
           setScriptLoaded(true);
         };

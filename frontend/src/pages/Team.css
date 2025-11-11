@@ -1,0 +1,50 @@
+.team-page {
+  padding: 40px 20px 60px;
+}
+
+.team-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.team-header h1 {
+  font-size: 2.8rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.team-header p {
+  font-size: 1.15rem;
+  color: #666;
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 35px;
+  margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+  .team-header h1 {
+    font-size: 2.2rem;
+  }
+
+  .team-header p {
+    font-size: 1rem;
+  }
+
+  .team-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+}

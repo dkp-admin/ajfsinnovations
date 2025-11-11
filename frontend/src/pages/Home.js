@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Spline3D from '../components/Spline3D';
 import './Home.css';
 
 function Home() {
   return (
     <div className="home-page">
       <section className="hero-section">
+        <Spline3D />
         <div className="container">
           <h1>Innovating Your Future with Cloud Solutions</h1>
           <p>AJFS Innovations Pvt Ltd offers cutting-edge cloud and software development services to propel your business forward.</p>

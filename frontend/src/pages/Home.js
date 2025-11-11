@@ -8,14 +8,6 @@ function Home() {
     <div className="home-page">
       <section className="hero-section">
         <Spline3DSection />
-        <div className="container">
-          <h1>Innovating Your Future with Cloud Solutions</h1>
-          <p>AJFS Innovations Pvt Ltd offers cutting-edge cloud and software development services to propel your business forward.</p>
-          <div className="hero-buttons">
-            <Link to="/services" className="btn btn-primary">Our Services</Link>
-            <Link to="/contact" className="btn btn-secondary">Get in Touch</Link>
-          </div>
-        </div>
       </section>
 
       <section className="about-section container">

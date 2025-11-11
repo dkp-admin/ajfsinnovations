@@ -60,36 +60,6 @@ export default function Spline3DSection() {
       }}
     >
       {!scriptLoaded && <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', width: '100%', height: '100%' }} />}
-      <div
-        ref={textOverlayRef}
-        style={{
-          position: 'absolute',
-          top: '0',
-          left: '0',
-          right: '0',
-          bottom: '0',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          zIndex: 999,
-          pointerEvents: 'none',
-          padding: '20px'
-        }}
-      >
-        <h2 style={{
-          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-          fontWeight: 'bold',
-          margin: '0',
-          lineHeight: '1.2',
-          color: '#fff',
-          textShadow: '0 2px 10px rgba(0, 0, 0, 0.7)',
-          letterSpacing: '-0.5px',
-          textAlign: 'center',
-          maxWidth: '90%'
-        }}>
-          Innovating Your Future with Cloud Solutions
-        </h2>
-      </div>
     </div>
   );
 }

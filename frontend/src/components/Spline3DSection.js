@@ -43,16 +43,38 @@ export default function Spline3DSection() {
   }, [scriptLoaded]);
 
   return (
-    <div 
+    <div
       ref={containerRef}
-      style={{ 
-        width: '100%', 
-        height: '600px', 
+      style={{
+        width: '100%',
+        height: '600px',
         position: 'relative',
         overflow: 'hidden'
       }}
     >
       {!scriptLoaded && <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', width: '100%', height: '100%' }} />}
+      <div style={{
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        zIndex: 10,
+        textAlign: 'center',
+        color: '#fff',
+        pointerEvents: 'none',
+        maxWidth: '90%'
+      }}>
+        <h2 style={{
+          fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+          fontWeight: 'bold',
+          margin: '0',
+          lineHeight: '1.2',
+          textShadow: '2px 2px 8px rgba(0, 0, 0, 0.5)',
+          letterSpacing: '-0.5px'
+        }}>
+          Innovating Your Future with Cloud Solutions
+        </h2>
+      </div>
     </div>
   );
 }

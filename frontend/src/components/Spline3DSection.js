@@ -3,6 +3,8 @@ import { useEffect, useState, useRef } from 'react';
 export default function Spline3DSection() {
   const [scriptLoaded, setScriptLoaded] = useState(false);
   const containerRef = useRef(null);
+  const viewerRef = useRef(null);
+  const textOverlayRef = useRef(null);
 
   useEffect(() => {
     const loadSplineScript = () => {
@@ -27,7 +29,7 @@ export default function Spline3DSection() {
   }, []);
 
   useEffect(() => {
-    if (scriptLoaded && containerRef.current) {
+    if (scriptLoaded && containerRef.current && !viewerRef.current) {
       const viewer = document.createElement('spline-viewer');
       viewer.setAttribute('url', 'https://prod.spline.design/8QpWcZeBUq1Kvri4/scene.splinecode');
       viewer.style.width = '100%';
@@ -36,9 +38,14 @@ export default function Spline3DSection() {
       viewer.style.top = '0';
       viewer.style.left = '0';
       viewer.style.zIndex = '0';
-      
+
       containerRef.current.innerHTML = '';
       containerRef.current.appendChild(viewer);
+      viewerRef.current = viewer;
+
+      if (textOverlayRef.current) {
+        containerRef.current.appendChild(textOverlayRef.current);
+      }
     }
   }, [scriptLoaded]);
 
@@ -53,24 +60,32 @@ export default function Spline3DSection() {
       }}
     >
       {!scriptLoaded && <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', width: '100%', height: '100%' }} />}
-      <div style={{
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        zIndex: 10,
-        textAlign: 'center',
-        color: '#fff',
-        pointerEvents: 'none',
-        maxWidth: '90%'
-      }}>
+      <div
+        ref={textOverlayRef}
+        style={{
+          position: 'absolute',
+          top: '0',
+          left: '0',
+          right: '0',
+          bottom: '0',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 999,
+          pointerEvents: 'none',
+          padding: '20px'
+        }}
+      >
         <h2 style={{
           fontSize: 'clamp(2rem, 5vw, 3.5rem)',
           fontWeight: 'bold',
           margin: '0',
           lineHeight: '1.2',
-          textShadow: '2px 2px 8px rgba(0, 0, 0, 0.5)',
-          letterSpacing: '-0.5px'
+          color: '#fff',
+          textShadow: '0 2px 10px rgba(0, 0, 0, 0.7)',
+          letterSpacing: '-0.5px',
+          textAlign: 'center',
+          maxWidth: '90%'
         }}>
           Innovating Your Future with Cloud Solutions
         </h2>

@@ -75,6 +75,13 @@ function ServiceModal({ service, isOpen, onClose }) {
                 ))}
               </ul>
             </section>
+
+            {service.fitsInModel && (
+              <section className="modal-section fits-in-model-section">
+                <h3>Where IaaS Refactoring Fits in the 6R Model</h3>
+                <p>{service.fitsInModel}</p>
+              </section>
+            )}
           </div>
         </div>
       </div>

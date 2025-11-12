@@ -119,8 +119,15 @@ function Resources() {
       <div className="resources-cta container">
         <h2>Ready to Transform Your Cloud Infrastructure?</h2>
         <p>Get expert guidance from AJFS Innovations. Book a free consultation to discuss your cloud goals and strategy.</p>
-        <button className="btn btn-primary">Book a Cloud Strategy Call</button>
+        <button className="btn btn-primary" onClick={() => setIsStrategyModalOpen(true)}>
+          Book a Cloud Strategy Call
+        </button>
       </div>
+
+      <StrategyCallModal
+        isOpen={isStrategyModalOpen}
+        onClose={() => setIsStrategyModalOpen(false)}
+      />
     </div>
   );
 }

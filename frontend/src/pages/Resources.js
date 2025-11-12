@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import StrategyCallModal from '../components/StrategyCallModal';
 import './Resources.css';
 
 function Resources() {
+  const [isStrategyModalOpen, setIsStrategyModalOpen] = useState(false);
+
   const blogPosts = [
     {
       id: 1,

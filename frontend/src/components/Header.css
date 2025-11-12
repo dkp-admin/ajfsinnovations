@@ -15,6 +15,10 @@
   flex-wrap: wrap;
 }
 
+.header-inner {
+  gap: 20px;
+}
+
 .header .logo {
   color: #fff;
   text-decoration: none;

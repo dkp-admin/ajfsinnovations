@@ -180,31 +180,6 @@
   line-height: 1.5;
 }
 
-.timeline-info {
-  background: #f0f4ff;
-  padding: 16px 20px;
-  border-radius: 8px;
-  color: #333;
-  font-size: 1.05rem;
-}
-
-.timeline-info strong {
-  color: #2563eb;
-}
-
-.cta-section {
-  margin-top: 20px;
-  display: flex;
-  gap: 12px;
-}
-
-.cta-button {
-  padding: 14px 32px;
-  font-size: 1.05rem;
-  font-weight: 600;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
 
 @media (max-width: 768px) {
   .modal-overlay {

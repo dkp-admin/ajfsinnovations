@@ -8,11 +8,52 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
 }
 
 .service-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.service-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(37, 99, 235, 0.95) 100%);
+  padding: 20px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.service-card:hover .service-card-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.service-card-button {
+  background: white;
+  color: #2563eb;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.service-card-button:hover {
+  background: #f0f4ff;
+  transform: scale(1.05);
 }
 
 .service-image-wrapper {
@@ -35,7 +76,7 @@
 }
 
 .service-card h3 {
-  color: #007bff;
+  color: #2563eb;
   margin-bottom: 15px;
   font-size: 1.4rem;
 }

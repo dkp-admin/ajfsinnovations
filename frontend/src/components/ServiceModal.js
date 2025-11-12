@@ -54,19 +54,6 @@ function ServiceModal({ service, isOpen, onClose }) {
                 ))}
               </ul>
             </section>
-
-            <section className="modal-section">
-              <h3>Implementation Timeline</h3>
-              <p className="timeline-info">
-                <strong>Estimated Duration:</strong> {service.timeline}
-              </p>
-            </section>
-
-            <section className="modal-section cta-section">
-              <button className="btn btn-primary cta-button">
-                Book a Consultation
-              </button>
-            </section>
           </div>
         </div>
       </div>

@@ -21,12 +21,33 @@ function ServiceModal({ service, isOpen, onClose }) {
 
           <div className="modal-body">
             <section className="modal-section">
-              <h3>Overview</h3>
-              <p>{service.overview}</p>
-            </section>
+            <h3>Overview</h3>
+            <p>{service.overview}</p>
+          </section>
 
+          {service.sixRFramework && (
             <section className="modal-section">
-              <h3>Key Benefits</h3>
+              <h3>{service.sixRFramework.title}</h3>
+              <p>{service.sixRFramework.description}</p>
+
+              <div className="six-r-container">
+                {service.sixRFramework.strategies.map((strategy, index) => (
+                  <div key={index} className="six-r-card">
+                    <h4>{strategy.name}</h4>
+                    <p className="six-r-subtitle">{strategy.subtitle}</p>
+                    <p className="six-r-description">{strategy.description}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="six-r-diagram-section">
+                <DiagramRenderer diagramType={service.sixRFramework.diagram} />
+              </div>
+            </section>
+          )}
+
+          <section className="modal-section">
+            <h3>Key Benefits</h3>
               <ul className="benefits-list">
                 {service.benefits.map((benefit, index) => (
                   <li key={index}>{benefit}</li>

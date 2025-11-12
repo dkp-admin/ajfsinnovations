@@ -326,6 +326,77 @@ function DiagramRenderer({ diagramType }) {
       </svg>
     ),
 
+    'six-r-framework': (
+      <svg viewBox="0 0 700 200" className="service-diagram">
+        <defs>
+          <linearGradient id="r1" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{ stopColor: '#2563eb', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: '#1d4ed8', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="r2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{ stopColor: '#16a34a', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: '#15803d', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="r3" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{ stopColor: '#ca8a04', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: '#92400e', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="r4" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{ stopColor: '#dc2626', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: '#991b1b', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="r5" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{ stopColor: '#9333ea', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: '#6b21a8', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="r6" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style={{ stopColor: '#0891b2', stopOpacity: 1 }} />
+            <stop offset="100%" style={{ stopColor: '#0e7490', stopOpacity: 1 }} />
+          </linearGradient>
+        </defs>
+
+        <rect width="700" height="200" fill="#f8f9fa" />
+
+        {/* Rehost */}
+        <rect x="10" y="30" width="100" height="70" rx="6" fill="url(#r1)" stroke="#2563eb" strokeWidth="2" />
+        <text x="60" y="50" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">Rehost</text>
+        <text x="60" y="80" textAnchor="middle" fill="white" fontSize="10">(Lift-Shift)</text>
+
+        {/* Replatform */}
+        <rect x="120" y="30" width="100" height="70" rx="6" fill="url(#r2)" stroke="#16a34a" strokeWidth="2" />
+        <text x="170" y="50" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">Replatform</text>
+        <text x="170" y="80" textAnchor="middle" fill="white" fontSize="10">(Lift-Opt)</text>
+
+        {/* Refactor - highlighted as most impactful */}
+        <rect x="230" y="20" width="100" height="90" rx="6" fill="url(#r3)" stroke="#ca8a04" strokeWidth="3" />
+        <text x="280" y="50" textAnchor="middle" fill="white" fontSize="13" fontWeight="bold">Refactor</text>
+        <text x="280" y="75" textAnchor="middle" fill="white" fontSize="9">(Re-architect)</text>
+        <text x="280" y="100" textAnchor="middle" fill="white" fontSize="9" fontWeight="bold">★ HIGHEST VALUE</text>
+
+        {/* Repurchase */}
+        <rect x="340" y="30" width="100" height="70" rx="6" fill="url(#r4)" stroke="#dc2626" strokeWidth="2" />
+        <text x="390" y="50" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">Repurchase</text>
+        <text x="390" y="80" textAnchor="middle" fill="white" fontSize="10">(SaaS Adopt)</text>
+
+        {/* Retire */}
+        <rect x="450" y="30" width="100" height="70" rx="6" fill="url(#r5)" stroke="#9333ea" strokeWidth="2" />
+        <text x="500" y="50" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">Retire</text>
+        <text x="500" y="80" textAnchor="middle" fill="white" fontSize="10">(Decommission)</text>
+
+        {/* Retain */}
+        <rect x="560" y="30" width="100" height="70" rx="6" fill="url(#r6)" stroke="#0891b2" strokeWidth="2" />
+        <text x="610" y="50" textAnchor="middle" fill="white" fontSize="12" fontWeight="bold">Retain</text>
+        <text x="610" y="80" textAnchor="middle" fill="white" fontSize="10">(Keep As-Is)</text>
+
+        {/* Legend */}
+        <text x="10" y="130" fill="#333" fontSize="11" fontWeight="bold">Strategy Guide:</text>
+        <line x1="10" y1="135" x2="690" y2="135" stroke="#d1d5db" strokeWidth="1" />
+
+        <text x="10" y="155" fill="#555" fontSize="10">Rehost: Fastest • Replatform: Quick Wins • Refactor: Maximum Value • Repurchase: Reduce Ops</text>
+        <text x="10" y="175" fill="#555" fontSize="10">Retire: Cost Savings • Retain: Future Ready • Often use hybrid approach combining multiple strategies</text>
+      </svg>
+    ),
+
     'software-development': (
       <svg viewBox="0 0 600 400" className="service-diagram">
         <rect width="600" height="400" fill="#f8f9fa" />

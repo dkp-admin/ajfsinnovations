@@ -181,6 +181,76 @@
 }
 
 
+.six-r-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.six-r-card {
+  background: linear-gradient(135deg, #f0f4ff 0%, #f8f9fa 100%);
+  border: 2px solid #2563eb;
+  border-radius: 10px;
+  padding: 16px;
+  transition: all 0.3s ease;
+}
+
+.six-r-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.15);
+  background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 100%);
+}
+
+.six-r-card h4 {
+  margin: 0 0 6px 0;
+  color: #2563eb;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.six-r-subtitle {
+  margin: 0 0 8px 0;
+  color: #1d4ed8;
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.six-r-description {
+  margin: 0;
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.six-r-diagram-section {
+  margin: 24px 0;
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.fits-in-model-section {
+  background: linear-gradient(135deg, #fef08a 0%, #fde68a 100%);
+  border-left: 5px solid #ca8a04;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.fits-in-model-section h3 {
+  color: #854d0e;
+  margin-top: 0;
+}
+
+.fits-in-model-section p {
+  color: #7c2d12;
+  margin: 0;
+}
+
 @media (max-width: 768px) {
   .modal-overlay {
     padding: 10px;

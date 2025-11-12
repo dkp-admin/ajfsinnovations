@@ -192,38 +192,77 @@ export const serviceDetails = [
   {
     id: 6,
     title: 'Refactoring using IaaS Approach',
-    overview: 'Re-architect workloads to leverage cloud infrastructure effectively. Optimize for flexibility, resource utilization, and scalability.',
+    overview: 'Re-architect workloads to leverage cloud infrastructure effectively. IaaS refactoring optimizes your applications and infrastructure for flexibility, resource utilization, scalability, and cost efficiency. This approach redesigns applications to maximize cloud-native capabilities while improving performance and resilience.',
+    sixRFramework: {
+      title: 'Cloud Migration 6R Strategy',
+      description: 'The 6R framework guides your migration strategy decisions. IaaS Refactoring is one of the most impactful paths:',
+      strategies: [
+        {
+          name: 'Rehost',
+          subtitle: 'Lift-and-Shift',
+          description: 'Move workloads to cloud VMs without major changes. Fastest migration path with minimal refactoring.'
+        },
+        {
+          name: 'Replatform',
+          subtitle: 'Lift-and-Optimize',
+          description: 'Make light optimizations while migrating (e.g., switch to managed databases for reduced ops overhead).'
+        },
+        {
+          name: 'Refactor',
+          subtitle: 'Re-architect',
+          description: 'Redesign architecture for cloud-native scalability, performance, and cost benefits. Highest complexity but greatest value.'
+        },
+        {
+          name: 'Repurchase',
+          subtitle: 'SaaS Adoption',
+          description: 'Replace existing applications with SaaS products. Reduces maintenance and infrastructure costs.'
+        },
+        {
+          name: 'Retire',
+          subtitle: 'Decommission',
+          description: 'Remove unused, redundant, or obsolete applications. Reduces licensing and infrastructure costs.'
+        },
+        {
+          name: 'Retain',
+          subtitle: 'Keep As-Is',
+          description: 'Keep workloads unchanged when migration is not yet feasible. Revisit later as business needs evolve.'
+        }
+      ],
+      diagram: 'six-r-framework'
+    },
     benefits: [
-      'VM optimization and right-sizing strategies',
-      'Storage restructuring for efficiency',
-      'Network segmentation and security improvements',
-      'Enhanced flexibility and resource control',
-      'Cost optimization through better resource utilization'
+      'VM optimization and right-sizing for improved cost efficiency',
+      'Storage restructuring for enhanced performance and redundancy',
+      'Network segmentation with improved security and isolation',
+      'Enhanced flexibility and resource control for scalability',
+      'Cost optimization through improved utilization and reduced waste',
+      'Increased resilience and disaster recovery capabilities'
     ],
     phases: [
       {
-        phase: 'Phase 1: Analysis',
-        description: 'Analyze current workloads and dependencies'
+        phase: 'Phase 1: Assessment & Strategy',
+        description: 'Analyze workloads, dependencies, and determine 6R approach fit'
       },
       {
-        phase: 'Phase 2: Design',
-        description: 'Design IaaS-optimized architecture'
+        phase: 'Phase 2: Design & Architecture',
+        description: 'Design IaaS-optimized architecture with cloud-native patterns'
       },
       {
-        phase: 'Phase 3: Refactoring',
-        description: 'Re-architect applications for IaaS'
+        phase: 'Phase 3: Refactoring & Development',
+        description: 're-architect applications, optimize VMs, storage, and networking'
       },
       {
-        phase: 'Phase 4: Deployment',
-        description: 'Deploy and validate refactored systems'
+        phase: 'Phase 4: Deployment & Validation',
+        description: 'Deploy refactored systems with comprehensive testing and monitoring'
       }
     ],
     useCases: [
-      'Lift-and-shift optimization',
-      'Cost reduction initiatives',
-      'Performance improvement projects',
-      'Capacity planning and scalability'
+      'Legacy monolithic application modernization to cloud-native',
+      'Cost reduction through VM right-sizing and storage optimization',
+      'Performance improvement with cloud-native architecture patterns',
+      'Hybrid migration using multiple 6R strategies'
     ],
+    fitsInModel: 'Refactoring is one of the most complex but highest-value modernization paths in the 6R model. While Rehost provides quick wins, Refactoring delivers maximum cloud benefits through fundamental redesign. Many organizations use a hybrid approach, combining Rehost for some workloads, Replatform for others, and Refactoring for critical, high-value applications.',
     timeline: '10-16 weeks',
     diagram: 'iaas-refactoring'
   },

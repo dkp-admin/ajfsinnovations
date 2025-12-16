@@ -6,11 +6,12 @@
   color: #fff;
   text-align: center;
   position: relative;
-  min-height: 600px;
+  min-height: 700px;
   overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
+  padding-bottom: 80px;
 }
 
 .hero-overlay {

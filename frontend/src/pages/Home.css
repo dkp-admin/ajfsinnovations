@@ -59,10 +59,11 @@
 }
 
 .hero-content p {
-  font-size: 1.3rem;
-  margin: 0 0 40px;
+  font-size: 1.1rem;
+  margin: 0 0 20px;
   line-height: 1.6;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  order: 2;
 }
 
 .hero-ctas {

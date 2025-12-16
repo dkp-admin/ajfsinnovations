@@ -105,6 +105,11 @@ function Home() {
       title: 'Reduced Cloud Costs by 40%',
       description: 'Optimized VM sizing, storage, and reserved instances across multi-cloud environments.',
       outcome: 'View Example Engagement'
+    },
+    {
+      title: 'Established Enterprise-Grade Security & Compliance',
+      description: 'Implemented comprehensive security controls, IAM policies, and compliance frameworks across cloud infrastructure.',
+      outcome: 'View Example Engagement'
     }
   ];
 

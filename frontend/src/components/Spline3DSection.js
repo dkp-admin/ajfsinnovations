@@ -54,9 +54,11 @@ export default function Spline3DSection() {
       ref={containerRef}
       style={{
         width: '100%',
-        height: '600px',
+        height: '400px',
         position: 'relative',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        order: 2,
+        zIndex: 0
       }}
     >
       {!scriptLoaded && <div style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', width: '100%', height: '100%' }} />}

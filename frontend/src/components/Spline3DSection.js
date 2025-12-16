@@ -54,8 +54,10 @@ export default function Spline3DSection() {
       ref={containerRef}
       style={{
         width: '100%',
-        height: '600px',
-        position: 'relative',
+        height: '500px',
+        position: 'absolute',
+        top: 0,
+        left: 0,
         overflow: 'hidden'
       }}
     >

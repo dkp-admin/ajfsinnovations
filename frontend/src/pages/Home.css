@@ -167,6 +167,12 @@
   font-size: 1rem;
 }
 
+.takeaway-card:nth-child(4) {
+  grid-column: 1 / -1;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
 .challenges-section {
   padding: 60px 20px;
   background: white;

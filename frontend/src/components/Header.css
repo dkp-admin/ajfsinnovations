@@ -93,8 +93,8 @@
     justify-content: center;
   }
 
-  .header .logo {
-    font-size: 1.4rem;
+  .header .logo-image {
+    height: 45px;
   }
 
   .cta-button {

@@ -1,7 +1,7 @@
 .header {
   background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
   color: #fff;
-  padding: 1.2rem 0;
+  padding: 0.8rem 0;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   position: sticky;
   top: 0;
@@ -20,16 +20,21 @@
 }
 
 .header .logo {
-  color: #fff;
   text-decoration: none;
-  font-size: 1.6rem;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  transition: color 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
 .header .logo:hover {
-  color: #ffd700;
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+.header .logo-image {
+  height: 100px;
+  width: auto;
+  display: block;
 }
 
 .header .nav ul {
@@ -88,8 +93,8 @@
     justify-content: center;
   }
 
-  .header .logo {
-    font-size: 1.4rem;
+  .header .logo-image {
+    height: 75px;
   }
 
   .cta-button {
@@ -112,8 +117,8 @@
     font-size: 0.85rem;
   }
 
-  .header .logo {
-    font-size: 1.1rem;
+  .header .logo-image {
+    height: 60px;
   }
 
   .cta-button {

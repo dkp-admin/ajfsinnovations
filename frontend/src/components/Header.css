@@ -20,16 +20,21 @@
 }
 
 .header .logo {
-  color: #fff;
   text-decoration: none;
-  font-size: 1.6rem;
-  font-weight: bold;
-  letter-spacing: 0.5px;
-  transition: color 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
 }
 
 .header .logo:hover {
-  color: #ffd700;
+  opacity: 0.85;
+  transform: scale(1.02);
+}
+
+.header .logo-image {
+  height: 50px;
+  width: auto;
+  display: block;
 }
 
 .header .nav ul {

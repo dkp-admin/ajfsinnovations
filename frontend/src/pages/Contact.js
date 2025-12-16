@@ -61,15 +61,15 @@ function Contact() {
           <div className="contact-info">
             <div className="contact-info-item">
               <strong>📍 Address:</strong>
-              <p>Your Company Address Here<br/>City, State, PIN Code</p>
+              <p>Plot-931, SY-11/14, Ayyappa Society,<br/>Khanamet, Kondapur, Serilingampally,<br/>K.V. Rangareddy – 500084, Telangana, India</p>
             </div>
             <div className="contact-info-item">
               <strong>📞 Phone:</strong>
-              <p>+91 XXX XXX XXXX</p>
+              <p>+91 9440082400<br/>+966 (0) 539657407</p>
             </div>
             <div className="contact-info-item">
               <strong>✉️ Email:</strong>
-              <p>info@ajfsindia.com</p>
+              <p>dkp@ajfsindia.com</p>
             </div>
           </div>
         </div>

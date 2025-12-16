@@ -14,7 +14,7 @@ body {
 
 .btn {
   display: inline-block;
-  background: #007bff;
+  background: #2563eb;
   color: #fff;
   padding: 12px 30px;
   border-radius: 5px;
@@ -28,42 +28,42 @@ body {
 }
 
 .btn:hover {
-  background: #0056b3;
+  background: #1d4ed8;
   transform: translateY(-2px);
 }
 
 .btn-primary {
-  background: #007bff;
+  background: #2563eb;
 }
 
 .btn-primary:hover {
-  background: #0056b3;
+  background: #1d4ed8;
 }
 
 .btn-secondary {
-  background: #6c757d;
+  background: #4b5563;
 }
 
 .btn-secondary:hover {
-  background: #545b62;
+  background: #3a4452;
 }
 
 .btn-tertiary {
-  background: #28a745;
+  background: #2563eb;
 }
 
 .btn-tertiary:hover {
-  background: #218838;
+  background: #1d4ed8;
 }
 
 .btn-outline {
   background: transparent;
-  color: #007bff;
-  border: 2px solid #007bff;
+  color: #2563eb;
+  border: 2px solid #2563eb;
 }
 
 .btn-outline:hover {
-  background: #007bff;
+  background: #2563eb;
   color: #fff;
 }
 

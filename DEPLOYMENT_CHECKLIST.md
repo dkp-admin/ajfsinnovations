@@ -1,286 +1,303 @@
-# AJFS Innovations - Deployment Checklist
+# GCP Cloud Run Deployment Checklist
 
-Use this checklist to ensure a smooth deployment to Google Cloud Run.
+Use this checklist to ensure everything is ready before deploying.
 
-## Pre-Deployment Checklist
+## Prerequisites ✓
 
-### Local Setup
-- [ ] Node.js 18+ installed
-- [ ] npm installed and working
-- [ ] Docker Desktop installed and running
-- [ ] Google Cloud SDK installed
-- [ ] Git installed and configured
-- [ ] Code repository created (GitHub/GitLab/Bitbucket)
+- [ ] GCP account created with billing enabled
+- [ ] GCP project created (e.g., `ajfs-innovations`)
+- [ ] gcloud CLI installed (`gcloud --version`)
+- [ ] gcloud configured (`gcloud auth login`)
+- [ ] Project ID set (`gcloud config set project YOUR_PROJECT_ID`)
+- [ ] Docker installed (for local testing)
+- [ ] Git installed and repository initialized
+- [ ] All code committed to main branch
 
-### Google Cloud Platform
-- [ ] GCP account created
-- [ ] Billing enabled on GCP project
-- [ ] Project ID noted down: `_________________`
-- [ ] gcloud CLI authenticated: `gcloud auth login`
-- [ ] Project set: `gcloud config set project PROJECT_ID`
+## Code Preparation ✓
 
-### Email Configuration
-- [ ] Hostinger email account created (e.g., info@ajfsindia.com)
-- [ ] SMTP credentials obtained
-- [ ] SMTP host confirmed: `smtp.hostinger.com`
-- [ ] SMTP port confirmed: `465`
-- [ ] Test email sent successfully from Hostinger
+### Backend (backend/ directory)
+- [ ] `package.json` updated with production dependencies
+- [ ] Environment variables documented
+- [ ] `server.js` listening on PORT environment variable (default 8080)
+- [ ] Health check endpoint exists (`/health`)
+- [ ] CORS configured correctly
+- [ ] Error handling implemented
+- [ ] Rate limiting configured
+- [ ] Dockerfile present and optimized
+- [ ] `.dockerignore` file exists (or use defaults)
+- [ ] No hardcoded credentials in code
+- [ ] No debug logging in production
 
-### Domain Information
-- [ ] Domain purchased: `ajfsindia.com`
-- [ ] Domain hosted at Hostinger
-- [ ] DNS management access verified
-- [ ] Current DNS records backed up (screenshots taken)
+### Frontend (frontend/ directory)
+- [ ] `package.json` updated with all dependencies
+- [ ] `npm run build` produces valid output
+- [ ] Environment variables for REACT_APP_* are documented
+- [ ] `nginx.conf` configured for Cloud Run (port 8080)
+- [ ] React Router configured for SPA routing
+- [ ] Dockerfile uses multi-stage build
+- [ ] `.dockerignore` file exists
+- [ ] No hardcoded API URLs (use environment variables)
+- [ ] Build size is reasonable (<500MB)
 
-## Backend Deployment
+## GCP Project Setup ✓
 
-### Configuration
-- [ ] Backend `.env` file created from `.env.example`
-- [ ] Email credentials added to `.env`
-- [ ] Contact receiver email configured
-- [ ] Environment variables verified
+- [ ] APIs enabled:
+  - [ ] Cloud Run API
+  - [ ] Cloud Build API
+  - [ ] Container Registry API
+  - [ ] Artifact Registry API
+- [ ] Service account created (optional but recommended)
+- [ ] IAM roles assigned:
+  - [ ] Cloud Run Admin
+  - [ ] Service Account User
+  - [ ] Cloud Build Editor
+- [ ] Billing alert set up
+- [ ] VPC network configured (if needed)
 
-### Enable GCP APIs
-```bash
-gcloud services enable cloudbuild.googleapis.com
-gcloud services enable run.googleapis.com
-gcloud services enable containerregistry.googleapis.com
-```
-- [ ] Cloud Build API enabled
-- [ ] Cloud Run API enabled
-- [ ] Container Registry API enabled
+## Configuration Files ✓
 
-### Docker Authentication
-```bash
-gcloud auth configure-docker
-```
-- [ ] Docker authenticated with GCR
+### backend/cloudbuild.yaml
+- [ ] Region set correctly (`_REGION`)
+- [ ] Environment variables documented
+- [ ] Email credentials configured
+- [ ] Contact receiver email set
+- [ ] Frontend URL placeholder
+- [ ] Memory/CPU settings appropriate
+- [ ] Timeout set correctly (60 seconds)
+- [ ] Machine type for build set
 
-### Build and Deploy Backend
+### frontend/cloudbuild.yaml
+- [ ] Region set correctly (`_REGION`)
+- [ ] Backend URL placeholder
+- [ ] Memory/CPU settings (256Mi/1 CPU)
+- [ ] Timeout set correctly
+
+### backend/Dockerfile
+- [ ] Node.js version compatible
+- [ ] Port 8080 exposed
+- [ ] Non-root user configured
+- [ ] Health check configured
+- [ ] Production dependencies only
+
+### frontend/Dockerfile
+- [ ] Multi-stage build used
+- [ ] Build stage installs all dependencies
+- [ ] Nginx configured for port 8080
+- [ ] Static asset caching configured
+- [ ] React Router fallback configured
+
+### frontend/nginx.conf
+- [ ] Listening on port 8080
+- [ ] Try files fallback for React Router
+- [ ] Gzip compression enabled
+- [ ] Security headers configured
+- [ ] Cache headers for static assets
+- [ ] Health check endpoint
+
+## Environment Variables ✓
+
+### Backend Variables
+- [ ] `EMAIL_HOST` = smtp.hostinger.com
+- [ ] `EMAIL_PORT` = 465
+- [ ] `EMAIL_SECURE` = true
+- [ ] `EMAIL_USER` = ajith4uuu@ajfsindia.com
+- [ ] `EMAIL_PASS` = (secure - use Secret Manager)
+- [ ] `CONTACT_RECEIVER_EMAIL` = dkp@ajfsindia.com
+- [ ] `FRONTEND_URL` = https://your-frontend-url.run.app
+- [ ] `NODE_ENV` = production
+- [ ] `PORT` = 8080
+
+### Frontend Variables
+- [ ] `REACT_APP_BACKEND_URL` = https://ajfs-backend-xxxxx-uc.a.run.app
+
+## Local Testing ✓
+
+### Backend
 ```bash
 cd backend
-docker build -t gcr.io/PROJECT_ID/ajfs-backend:latest .
-docker push gcr.io/PROJECT_ID/ajfs-backend:latest
-gcloud run deploy ajfs-backend --image gcr.io/PROJECT_ID/ajfs-backend:latest ...
+npm install
+npm start
+# Open http://localhost:8080
+curl http://localhost:8080/health
 ```
-- [ ] Backend Docker image built successfully
-- [ ] Backend image pushed to Container Registry
-- [ ] Backend deployed to Cloud Run
-- [ ] Backend URL noted: `_________________________________`
-- [ ] Backend health check passed: `/health` endpoint works
-- [ ] Backend contact form test successful
+- [ ] Server starts without errors
+- [ ] Health endpoint responds
+- [ ] No console errors
 
-## Frontend Deployment
-
-### Configuration
-- [ ] Frontend `.env` file created from `.env.example`
-- [ ] Backend URL added to frontend `.env`
-- [ ] `REACT_APP_BACKEND_URL` environment variable set
-
-### Build and Deploy Frontend
+### Frontend
 ```bash
 cd frontend
-docker build -t gcr.io/PROJECT_ID/ajfs-frontend:latest .
-docker push gcr.io/PROJECT_ID/ajfs-frontend:latest
-gcloud run deploy ajfs-frontend --image gcr.io/PROJECT_ID/ajfs-frontend:latest ...
+npm install
+npm run build
+# Check build output in build/ directory
+npm start
+# Open http://localhost:3000
 ```
-- [ ] Frontend Docker image built successfully
-- [ ] Frontend image pushed to Container Registry
-- [ ] Frontend deployed to Cloud Run
-- [ ] Frontend URL noted: `_________________________________`
-- [ ] Frontend loads in browser
-- [ ] All pages accessible (Home, Services, Team, Contact)
-- [ ] Contact form submits successfully
-- [ ] Email received from contact form
+- [ ] Build completes without errors
+- [ ] No console warnings (minimize)
+- [ ] App loads correctly
+- [ ] Navigation works
+- [ ] Backend API calls work
 
-## CI/CD Setup
-
-### Repository Setup
-- [ ] Code pushed to Git repository
-- [ ] Repository connected to Cloud Build
-
-### Backend Trigger
-- [ ] Backend trigger created in Cloud Build
-- [ ] Trigger name: `deploy-backend`
-- [ ] Branch: `main`
-- [ ] Config file: `/backend/cloudbuild.yaml`
-- [ ] Substitution variables added:
-  - [ ] `_EMAIL_HOST`
-  - [ ] `_EMAIL_PORT`
-  - [ ] `_EMAIL_SECURE`
-  - [ ] `_EMAIL_USER`
-  - [ ] `_EMAIL_PASS`
-  - [ ] `_CONTACT_RECEIVER_EMAIL`
-  - [ ] `_FRONTEND_URL`
-
-### Frontend Trigger
-- [ ] Frontend trigger created in Cloud Build
-- [ ] Trigger name: `deploy-frontend`
-- [ ] Branch: `main`
-- [ ] Config file: `/frontend/cloudbuild.yaml`
-- [ ] Substitution variables added:
-  - [ ] `_BACKEND_URL`
-
-### Test CI/CD
-- [ ] Made test commit to main branch
-- [ ] Backend trigger executed successfully
-- [ ] Frontend trigger executed successfully
-- [ ] Automatic deployment verified
-
-## Domain Configuration
-
-### Cloud Run Domain Mapping
+### Docker Build (Optional but Recommended)
 ```bash
-gcloud run domain-mappings create --service ajfs-frontend --domain www.ajfsindia.com ...
-gcloud run domain-mappings create --service ajfs-frontend --domain ajfsindia.com ...
+# Backend
+cd backend
+docker build -t ajfs-backend .
+docker run -p 8080:8080 ajfs-backend
+
+# Frontend
+cd frontend
+docker build -t ajfs-frontend .
+docker run -p 8080:8080 ajfs-frontend
 ```
-- [ ] Domain mapping created for `www.ajfsindia.com`
-- [ ] Domain mapping created for `ajfsindia.com` (optional)
-- [ ] DNS records retrieved from GCP
-- [ ] DNS records noted:
-  ```
-  CNAME: www → ghs.googlehosted.com.
-  A: @ → 216.239.32.21
-  A: @ → 216.239.34.21
-  A: @ → 216.239.36.21
-  A: @ → 216.239.38.21
-  ```
+- [ ] Docker build succeeds
+- [ ] Container runs without errors
+- [ ] Services accessible on configured ports
 
-### Hostinger DNS Configuration
-- [ ] Logged into Hostinger control panel
-- [ ] Navigated to DNS management for ajfsindia.com
-- [ ] Backed up current DNS records (screenshots)
-- [ ] Deleted old WordPress A records
-- [ ] Deleted old www CNAME record (if exists)
-- [ ] Added new CNAME record for `www`
-- [ ] Added 4 new A records for root domain `@`
-- [ ] Verified MX records still present (for email)
-- [ ] Verified TXT records still present
-- [ ] Saved DNS changes
-- [ ] DNS change timestamp noted: `_________________`
+## Cloud Run Deployment ✓
 
-## Post-Deployment Verification
+### Before Deployment
+- [ ] gcloud authenticated (`gcloud auth list`)
+- [ ] Project set correctly (`gcloud config get-value project`)
+- [ ] APIs enabled (run `gcloud services list --enabled`)
+- [ ] Container Registry/Artifact Registry ready
 
-### DNS Propagation (wait 15 mins - 48 hours)
-- [ ] DNS propagation checked: `dig www.ajfsindia.com`
-- [ ] DNS propagation checked: `dig ajfsindia.com`
-- [ ] Online DNS checker used: https://dnschecker.org
-- [ ] DNS resolving to Google Cloud IPs
+### Deployment Steps
+- [ ] Backend deployed first
+- [ ] Backend URL obtained
+- [ ] Frontend deployed with backend URL
+- [ ] Frontend URL obtained
+- [ ] Backend updated with frontend URL
 
-### Website Testing
-- [ ] `https://www.ajfsindia.com` loads successfully
-- [ ] `https://ajfsindia.com` loads successfully (if mapped)
-- [ ] SSL certificate is active (green padlock in browser)
-- [ ] All pages load correctly:
-  - [ ] Home page
-  - [ ] Services page
-  - [ ] Team page
-  - [ ] Contact page
-- [ ] Navigation works correctly
-- [ ] Contact form submits successfully
-- [ ] Email received from contact form
-- [ ] Mobile responsiveness verified
-- [ ] No console errors in browser
+### Post-Deployment Verification
+- [ ] Backend service exists: `gcloud run services describe ajfs-backend --region us-central1`
+- [ ] Frontend service exists: `gcloud run services describe ajfs-frontend --region us-central1`
+- [ ] Backend responds to health check: `curl $BACKEND_URL/health`
+- [ ] Frontend loads in browser: Open `$FRONTEND_URL`
+- [ ] Contact form works: Test submit
+- [ ] Email is received
 
-### Email Functionality
-- [ ] Hostinger email still works
-- [ ] Can send emails from info@ajfsindia.com
-- [ ] Can receive emails at info@ajfsindia.com
-- [ ] Contact form emails being received
-- [ ] Email formatting looks correct
+## Monitoring & Logs ✓
 
-### Performance Testing
-- [ ] Website loads quickly (< 3 seconds)
-- [ ] Images load properly
-- [ ] No broken links
-- [ ] Backend API responds quickly
+- [ ] View logs: `gcloud run logs read ajfs-backend --region us-central1`
+- [ ] Check for errors in logs
+- [ ] Monitor CPU usage
+- [ ] Monitor memory usage
+- [ ] Check request rates
 
-## Security & Monitoring
+## Custom Domain Setup ✓ (Optional)
 
-### Security
-- [ ] Environment variables not exposed in code
-- [ ] `.env` files added to `.gitignore`
-- [ ] Rate limiting working on contact form
-- [ ] CORS configured correctly
-- [ ] Security headers present (Helmet)
+- [ ] Domain registered and available
+- [ ] DNS records ready to be configured
+- [ ] SSL certificate will be auto-provisioned by Cloud Run
+- [ ] Cloud Armor policies configured (optional)
 
-### Monitoring Setup
-- [ ] Cloud Monitoring dashboard reviewed
-- [ ] Error logs checked (no errors)
-- [ ] Alert policies created:
-  - [ ] High error rate alert
-  - [ ] High latency alert
-  - [ ] Service downtime alert
+## Security Review ✓
 
-### Cost Optimization
-- [ ] Minimum instances set to 0 (for cost saving)
-- [ ] Memory/CPU appropriately sized
-- [ ] Budget alerts configured in GCP
+- [ ] No hardcoded secrets in code
+- [ ] Secrets stored in Cloud Secret Manager
+- [ ] CORS configured to specific domains
+- [ ] HTTPS enabled (automatic with Cloud Run)
+- [ ] Rate limiting configured
+- [ ] Input validation implemented
+- [ ] SQL injection prevention (if applicable)
+- [ ] XSS protection headers set
+- [ ] CSRF protection (if forms involved)
 
-## Documentation
+## Cost Management ✓
 
-- [ ] README.md reviewed and updated
-- [ ] DEPLOYMENT_GUIDE.md reviewed
-- [ ] DNS_SETUP_GUIDE.md reviewed
-- [ ] Team briefed on new website
-- [ ] Credentials securely stored
-- [ ] Backup of all configuration files created
+- [ ] Instance scaling configured (min: 0, max: 10)
+- [ ] Memory allocation appropriate
+- [ ] CPU allocation appropriate
+- [ ] Timeout settings reasonable
+- [ ] Billing alerts set up in GCP Console
+- [ ] Expected monthly cost estimated
+- [ ] Cost optimization plan in place
 
-## Old WordPress Site
+## Backup & Recovery ✓
 
-- [ ] Old WordPress site backed up completely
-- [ ] Database exported from WordPress
-- [ ] WordPress files downloaded
-- [ ] Backup stored securely
-- [ ] Decision made on when to cancel old hosting
-- [ ] Plan to keep hosting for 30 days minimum
-
-## Final Checks
-
-- [ ] All stakeholders notified of new website
-- [ ] Google Analytics added (if applicable)
-- [ ] Google Search Console verified
-- [ ] Social media links updated
-- [ ] Email signatures updated with new website
-- [ ] Business cards updated (if needed)
-
-## Rollback Plan (if needed)
-
-If something goes wrong:
+- [ ] Code backed up in Git
+- [ ] Cloud Build configurations backed up
+- [ ] Environment configuration documented
 - [ ] Rollback procedure documented
-- [ ] Old DNS records backed up
-- [ ] Know how to revert DNS to old WordPress site
-- [ ] Contact information for support ready:
-  - Hostinger support
-  - GCP support
-  - Development team
+- [ ] Data backup strategy (if applicable)
 
-## Sign-Off
+## Documentation ✓
 
-**Deployment completed by:** _____________________
+- [ ] Deployment guide written (GCP_CLOUD_RUN_DEPLOYMENT.md)
+- [ ] Quick reference created (QUICK_DEPLOY_MANUAL.md)
+- [ ] Team trained on deployment process
+- [ ] On-call runbook prepared
+- [ ] Known issues documented
 
-**Date:** _____________________
+## Final Checks ✓
 
-**Backend URL:** _____________________
+- [ ] All tests pass locally
+- [ ] No console errors/warnings in production
+- [ ] Performance acceptable
+- [ ] Load times under 3 seconds
+- [ ] Mobile responsive design verified
+- [ ] All forms functional
+- [ ] Email notifications working
+- [ ] Analytics/monitoring in place
 
-**Frontend URL:** _____________________
+## Post-Deployment ✓
 
-**Custom Domain:** www.ajfsindia.com
-
-**Status:** ✅ Deployed Successfully
+- [ ] Monitor services for 24 hours
+- [ ] Check logs daily for errors
+- [ ] Verify email delivery
+- [ ] Test user workflows
+- [ ] Monitor costs
+- [ ] Get feedback from stakeholders
+- [ ] Plan next release cycle
 
 ---
 
-## Notes & Issues
+## Deployment Command Reference
 
-Use this space to note any issues encountered or special configurations made:
+```bash
+# Set up
+export PROJECT_ID="your-gcp-project-id"
+gcloud config set project $PROJECT_ID
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com
 
-___________________________________________________________
+# Deploy Backend
+cd backend
+gcloud run deploy ajfs-backend --source . \
+  --region us-central1 \
+  --set-env-vars EMAIL_HOST=smtp.hostinger.com,...
+cd ..
 
-___________________________________________________________
+# Get Backend URL
+BACKEND_URL=$(gcloud run services describe ajfs-backend --region us-central1 --format='value(status.url)')
 
-___________________________________________________________
+# Deploy Frontend
+cd frontend
+gcloud run deploy ajfs-frontend --source . \
+  --region us-central1 \
+  --set-env-vars REACT_APP_BACKEND_URL=$BACKEND_URL
+cd ..
 
-___________________________________________________________
+# Get Frontend URL
+FRONTEND_URL=$(gcloud run services describe ajfs-frontend --region us-central1 --format='value(status.url)')
 
-___________________________________________________________
+# Update Backend with Frontend URL
+gcloud run services update ajfs-backend --region us-central1 \
+  --update-env-vars FRONTEND_URL=$FRONTEND_URL
+```
+
+---
+
+**Completion Date**: _______________
+
+**Deployed By**: _______________
+
+**Approval**: _______________
+
+---
+
+For questions or issues, refer to:
+- Full deployment guide: `GCP_CLOUD_RUN_DEPLOYMENT.md`
+- Quick reference: `QUICK_DEPLOY_MANUAL.md`
+- GCP Documentation: https://cloud.google.com/run/docs

@@ -8,18 +8,23 @@ steps:
       - '-t'
       - 'gcr.io/$PROJECT_ID/ajfs-backend:latest'
       - '.'
+    id: 'build-backend'
 
-  # Step 2: Push the Docker image to Container Registry
+  # Step 2: Push the Docker image to Container Registry (specific commit)
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
       - 'gcr.io/$PROJECT_ID/ajfs-backend:$COMMIT_SHA'
+    id: 'push-backend-sha'
+    waitFor: ['build-backend']
 
   # Step 3: Push the latest tag
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
       - 'gcr.io/$PROJECT_ID/ajfs-backend:latest'
+    id: 'push-backend-latest'
+    waitFor: ['build-backend']
 
   # Step 4: Deploy the image to Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
@@ -31,7 +36,7 @@ steps:
       - '--image'
       - 'gcr.io/$PROJECT_ID/ajfs-backend:$COMMIT_SHA'
       - '--region'
-      - 'us-central1'
+      - '${_REGION}'
       - '--platform'
       - 'managed'
       - '--allow-unauthenticated'
@@ -47,22 +52,41 @@ steps:
       - '10'
       - '--timeout'
       - '60'
+      - '--quiet'
+    id: 'deploy-backend'
+    waitFor: ['push-backend-sha', 'push-backend-latest']
+
+  # Step 5: Output deployment information
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: bash
+    args:
+      - '-c'
+      - |
+        echo "Backend deployment completed successfully"
+        gcloud run services describe ajfs-backend --region ${_REGION} --format='value(status.url)'
+    id: 'output-backend-url'
+    waitFor: ['deploy-backend']
 
 # Substitution variables - IMPORTANT: Set these in Cloud Build trigger settings
 # DO NOT commit actual values to version control
 substitutions:
+  _REGION: 'us-central1'
   _EMAIL_HOST: 'smtp.hostinger.com'
   _EMAIL_PORT: '465'
   _EMAIL_SECURE: 'true'
-  _EMAIL_USER: 'your_email@ajfsindia.com'  # CHANGE THIS
-  _EMAIL_PASS: 'your_password'  # CHANGE THIS - Use Secret Manager in production
-  _CONTACT_RECEIVER_EMAIL: 'admin@ajfsindia.com'  # CHANGE THIS
-  _FRONTEND_URL: 'https://www.ajfsindia.com'  # CHANGE THIS after frontend deployment
+  _EMAIL_USER: 'ajith4uuu@ajfsindia.com'
+  _EMAIL_PASS: 'YOUR_EMAIL_PASSWORD'  # IMPORTANT: Use Cloud Secret Manager for production
+  _CONTACT_RECEIVER_EMAIL: 'dkp@ajfsindia.com'
+  _FRONTEND_URL: 'https://www.ajfsindia.com'
 
 # Images to be stored in Container Registry
 images:
   - 'gcr.io/$PROJECT_ID/ajfs-backend:$COMMIT_SHA'
   - 'gcr.io/$PROJECT_ID/ajfs-backend:latest'
 
+# Timeout for build
+timeout: '1800s'
+
 options:
   logging: CLOUD_LOGGING_ONLY
+  machineType: 'N1_HIGHCPU_8'
